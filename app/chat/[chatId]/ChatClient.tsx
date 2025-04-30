@@ -21,6 +21,7 @@ import { Project } from "next/dist/build/swc/types";
 import ThemeToggle from "@/app/components/ThemeToggle";
 import { useRouter } from "next/navigation";
 import { expressURL, fastapiURL } from "@/app/config";
+import Loading from "@/app/components/loading";
 
 export default function ChatClient({ params }: {
   params: {
@@ -55,6 +56,7 @@ export default function ChatClient({ params }: {
   const { isOpen: isSidebarOpen, toggle: toggleSidebar } = useSidebar();
   const { getToken } = useAuth();
   const [messages, setMessages] = useState<Message[]>([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     scrollToBottom()
@@ -229,6 +231,7 @@ export default function ChatClient({ params }: {
               />
               <button
                 onClick={async () => {
+                  setLoading(true)
                   if (showFirstTime) {
                     const res = await axios.post(`${expressURL}/generateUsefulName/${projectId}`, {
                       query: message
@@ -249,9 +252,12 @@ export default function ChatClient({ params }: {
                     prompt: response.data.response
                   });
                   console.log("added system's answer to database")
+                  setLoading(false);
                 }}
                 className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-primary hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors">
-                <Send className="w-5 h-5" />
+                {loading ? <Loading /> :
+                  <Send className="w-5 h-5" />
+                }
               </button>
             </div>
           </div>
