@@ -37,7 +37,6 @@ export default function NavBar() {
                 Sign In
               </button>
             </SignInButton>
-            <SignOutButton><button>signout</button></SignOutButton>
             <SignUpButton>
               <button
                 className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors"

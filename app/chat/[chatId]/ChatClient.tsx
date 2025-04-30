@@ -120,7 +120,7 @@ export default function ChatClient({ params }: {
 
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <button className="w-full flex items-center justify-between px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg">
-            <div className=" py-6 flex items-center space-x-3">
+            <div className="flex items-center space-x-3">
               <SignedIn>
                 <UserButton />
               </SignedIn>
